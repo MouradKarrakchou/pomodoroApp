@@ -1,0 +1,35 @@
+<div class="flex flex-col justify-center gap-5">
+  <h1 class="text-center font-bold text-rose-200 text-xl">Is your pomodoro session on our website going well?</h1>
+  <div class="rating flex flex-row justify-center gap-3 relative">
+    <div
+      class="w-10 h-2 rounded-md transition-all duration-200 cursor-pointer flex flex-row justify-center"
+      [ngClass]="{'bg-green-400': sessionRating >= 1, 'bg-gray-300': sessionRating < 1}"
+      (click)="setRating(1)">
+      <p class="text-2xl mt-4 select-none pointer-events-none" [ngClass]="{'hidden': sessionRating !== 1}">🤨</p>
+    </div>
+    <div
+      class="w-10 h-2 rounded-md transition-all duration-200 cursor-pointer flex flex-row justify-center"
+      [ngClass]="{'bg-green-400': sessionRating >= 2, 'bg-gray-300': sessionRating < 2}"
+      (click)="setRating(2)">
+      <p class="text-2xl mt-4 select-none pointer-events-none" [ngClass]="{'hidden': sessionRating !== 2}">🙂</p>
+    </div>
+    <div
+      class="w-10 h-2 rounded-md transition-all duration-200 cursor-pointer flex flex-row justify-center"
+      [ngClass]="{'bg-green-400': sessionRating >= 3, 'bg-gray-300': sessionRating < 3}"
+      (click)="setRating(3)">
+      <p class="text-2xl mt-4 select-none pointer-events-none" [ngClass]="{'hidden': sessionRating !== 3}">😊</p>
+    </div>
+    <div
+      class="w-10 h-2 rounded-md transition-all duration-200 cursor-pointer flex flex-row justify-center"
+      [ngClass]="{'bg-green-400': sessionRating >= 4, 'bg-gray-300': sessionRating < 4}"
+      (click)="setRating(4)">
+      <p class="text-2xl mt-4 select-none pointer-events-none" [ngClass]="{'hidden': sessionRating !== 4}">😚</p>
+    </div>
+    <div
+      class="w-10 h-2 rounded-md transition-all duration-200 cursor-pointer flex flex-row justify-center"
+      [ngClass]="{'bg-green-400': sessionRating >= 5, 'bg-gray-300': sessionRating < 5}"
+      (click)="setRating(5)">
+      <p class="text-2xl mt-4 select-none pointer-events-none" [ngClass]="{'hidden': sessionRating !== 5}">😍</p>
+    </div>
+  </div>
+</div>
