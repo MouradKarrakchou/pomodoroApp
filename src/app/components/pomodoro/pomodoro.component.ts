@@ -21,9 +21,9 @@ import {SettingsComponent} from "../settings/settings.component";
 })
 export class PomodoroComponent {
 
-  workTime = new TimerValue(0,10)
+  workTime = new TimerValue(25,0)
 
-  breakTime = new TimerValue(0,5)
+  breakTime = new TimerValue(5,0)
 
   isWorkTime = true;
 
