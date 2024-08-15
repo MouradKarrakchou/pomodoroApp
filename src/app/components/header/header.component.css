@@ -11,3 +11,13 @@
 h1 {
   @apply text-2xl;
 }
+
+.titleText{
+  font-size : 3vh;
+}
+
+@media only screen and (max-width: 1200px) {
+  .titleText{
+    font-size : 3vw;
+  }
+}

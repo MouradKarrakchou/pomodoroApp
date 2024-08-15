@@ -1,8 +1,11 @@
-<div class="flex flex-col m-auto border border-white py-1.5 rounded-2xl p-[50px] h-[100%]">
+
+<div class="flex flex-col m-auto border border-white py-1.5 rounded-2xl p-[20px] chrono h-[100%] w-[100%]">
+  <svg class="ml-auto h-8 w-8 text-black-500 cursor-pointer"  viewBox="0 0 24 24" (click)="clickParameter()" fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <circle cx="12" cy="12" r="3" />  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>
+
   <div class="flex items-center justify-center w-full gap-1.5 count-down-main m-auto mb-7 ">
     <div class="timer m-auto">
       <div
-        class="rounded-xl border border-white py-1.5 w-[10vh] flex items-center justify-center flex-col gap-0 aspect-square px-1.5">
+        class="rounded-xl border border-white py-1.5 w-[10vh] max-w-[20vw] flex items-center justify-center flex-col gap-0 aspect-square px-1.5">
         <h3
           class="countdown-element minutes font-manrope font-semibold text-[3vh] text-white text-center">
           {{ timeVariable.minutes }}
@@ -13,7 +16,7 @@
     <h3 class="font-manrope font-semibold text-2xl text-gray-900">:</h3>
     <div class="timer m-auto">
       <div
-        class="rounded-xl border border-white py-1.5 w-[10vh] flex items-center justify-center flex-col gap-0 aspect-square px-1.5">
+        class="rounded-xl border border-white py-1.5 w-[10vh] max-w-[20vw] flex items-center justify-center flex-col gap-0 aspect-square px-1.5">
         <h3
           class="countdown-element seconds sec font-manrope font-semibold text-[3vh] text-white text-center">
           {{ timeVariable.seconds }}
@@ -28,10 +31,12 @@
       <div class="relative text-blue-900 font-medium text-sm">{{getPercentage()}}%</div>
     </div>
   </div>
-  <div class="flex m-auto mt-5 cursor-pointer">
-    <button *ngIf="!timerStarted;else pauseTimerButton" type="button" (click)="startTimer()" class="m-auto w-[300px] text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 font-medium rounded-3xl text-2xl px-5 py-2.5 text-center">Start pomodoro</button>
+  <div class="flex m-auto mt-5 cursor-pointer ">
+    <button *ngIf="!timerStarted;else pauseTimerButton" type="button" (click)="startTimer()" class="m-auto h-[15vw] max-h-[7vh] text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 font-medium rounded-3xl px-5 text-center">Start pomodoro</button>
     <svg class="m-auto ml-3 bg-green-400 rounded-xl h-10 w-10 text-black p-1.5"  (click)="restartSession()" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="1 4 1 10 7 10" />  <polyline points="23 20 23 14 17 14" />  <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" /></svg>
   </div>
+
+
 </div>
 
 
@@ -41,5 +46,8 @@
 
 
 <ng-template #pauseTimerButton>
-  <button type="button" (click)="pauseTimer()" class="m-auto w-[300px] text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 font-medium rounded-3xl text-2xl px-5 py-2.5 text-center">Pause pomodoro</button>
+  <button type="button" (click)="pauseTimer()" class="m-auto h-[15vw] max-h-[7vh] text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 font-medium rounded-3xl px-5 text-center">Pause pomodoro</button>
 </ng-template>
+
+
+<app-settings  (windowCloseEvent)="clickParameter()" (changeBreakTimeEvent)="changeBreakTime($event)" (changeWorkTimeEvent)="changeWorkTime($event)" [windowOpened]="windowOpened" [workTime]="workTime" [breakTime]="breakTime" ></app-settings>

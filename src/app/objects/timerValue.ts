@@ -30,4 +30,17 @@ export class TimerValue {
   clone(): TimerValue {
     return new TimerValue(this.minutes, this.seconds);
   }
+
+  toString(): string {
+    const hours = Math.floor(this._minutes / 60);
+    const minutes = this._minutes % 60;
+    const seconds = this._seconds;
+
+    return `${this.formatTimeComponent(hours)}:${this.formatTimeComponent(minutes)}:${this.formatTimeComponent(seconds)}`;
+  }
+
+  private formatTimeComponent(component: number): string {
+    return component < 10 ? `0${component}` : `${component}`;
+  }
+
 }

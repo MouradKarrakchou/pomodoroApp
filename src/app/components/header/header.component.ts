@@ -15,8 +15,6 @@ export class HeaderComponent {
 
   darkModeActivated = false;
 
-  windowOpened = false;
-
   changeMode(variable: any) : void{
     if (this.darkModeActivated)
       this.darkModeEvent.emit("white")
@@ -25,7 +23,5 @@ export class HeaderComponent {
     this.darkModeActivated = !this.darkModeActivated;
   }
 
-  clickParameter() : void{
-      this.windowOpened = !this.windowOpened;
-  }
+
 }

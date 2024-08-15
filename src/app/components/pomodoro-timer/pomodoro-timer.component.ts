@@ -2,12 +2,14 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {timer} from "rxjs";
 import {TimerValue} from "../../objects/timerValue";
 import {NgIf} from "@angular/common";
+import {SettingsComponent} from "../settings/settings.component";
 
 @Component({
   selector: 'app-pomodoro-timer',
   standalone: true,
   imports: [
-    NgIf
+    NgIf,
+    SettingsComponent
   ],
   templateUrl: './pomodoro-timer.component.html',
   styleUrl: './pomodoro-timer.component.css'
@@ -31,6 +33,8 @@ export class PomodoroTimerComponent {
 
   timeLeft: number;
 
+  windowOpened = false;
+
   getPercentage(): number{
     return Math.round(10*(100 * (this.currentReferenceTime - this.timeLeft) / (this.currentReferenceTime)))/10;
   }
@@ -39,6 +43,20 @@ export class PomodoroTimerComponent {
     this.currentReferenceTime = this.workTime.minutes * 60 + this.workTime.seconds
     this.timeVariable = this.workTime.clone();
     this.timeLeft = this.workTime.minutes * 60 + this.workTime.seconds;
+  }
+
+  clickParameter() : void{
+    this.windowOpened = !this.windowOpened;
+  }
+
+  changeWorkTime(newTime : TimerValue) : void{
+    this.workTime = newTime
+    this.clearChronometers()
+  }
+
+  changeBreakTime(newTime : TimerValue) : void{
+    this.breakTime = newTime
+    this.clearChronometers()
   }
 
 
@@ -53,14 +71,23 @@ export class PomodoroTimerComponent {
     }
   }
 
-  restartSession():void{
+
+  clearChronometers():void{
     this.pauseTimer();
-    this.timeLeft = this.workTime.minutes * 60 + this.workTime.seconds;
+    if (this.isWorkTime)
+    {this.timeLeft = this.workTime.getTotalTime();
+      this.timeVariable= this.workTime.clone();}
+
+  else
+    {this.timeLeft = this.breakTime.getTotalTime()
+      this.timeVariable= this.breakTime.clone();}
     this.currentReferenceTime = this.timeLeft;
+
+  }
+  restartSession():void{
     this.changeSession.emit("work");
     this.isWorkTime = true;
-
-    this.timeVariable= this.workTime.clone();
+    this.clearChronometers();
   }
 
 
@@ -78,12 +105,12 @@ export class PomodoroTimerComponent {
       if (this.timeLeft < 0) {
         this.timeVariable = new TimerValue(0,0);
         if (this.isWorkTime) {
-          this.timeLeft = this.breakTime.minutes * 60 + this.breakTime.seconds;
+          this.timeLeft = this.breakTime.getTotalTime()
           this.currentReferenceTime = this.timeLeft;
           this.changeSession.emit("break");
         }
         else {
-          this.timeLeft = this.workTime.minutes * 60 + this.workTime.seconds;
+          this.timeLeft = this.workTime.getTotalTime()
           this.currentReferenceTime = this.timeLeft;
           this.changeSession.emit("work");
         }

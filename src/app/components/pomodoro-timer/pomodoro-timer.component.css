@@ -1,5 +1,16 @@
+
+
 :host{
   height: 40%;
   width: 40%;
   display: flex;
+}
+
+@media only screen and (max-width: 1000px) {
+  :host {
+    width:70%
+  }
+  .chrono{
+    padding: 5px;
+  }
 }

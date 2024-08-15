@@ -1,6 +1,6 @@
 <div class="flex mb-auto h-[100%] flex-col">
   <div class="ml-auto mr-auto">
-    <img *ngIf="isWorkTime;else restTime" ngSrc="assets/images/workingIcon.png" priority="" alt="image" height="300" width="300">
+    <img *ngIf="isWorkTime;else restTime" ngSrc="assets/images/workingIcon.png" priority="" alt="image" height="300" width="300" class="image">
   </div>
   <app-pomodoro-timer class="ml-auto mr-auto" [workTime]="workTime" [breakTime]="breakTime" (changeSession)="changeSession($event)"  ></app-pomodoro-timer>
   <app-like-session class="m-auto"></app-like-session>
@@ -9,7 +9,7 @@
 
 
 <ng-template #restTime>
-  <img ngSrc="assets/images/relaxing.png" priority="" alt="image" height="300" width="300">
+  <img ngSrc="assets/images/relaxing.png" priority="" alt="image" height="300" width="300" class="image">
 </ng-template>
 
 

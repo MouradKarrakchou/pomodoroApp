@@ -22,15 +22,21 @@ export class SettingsComponent {
   @Output() changeWorkTimeEvent = new EventEmitter<TimerValue>();
   @Output() changeBreakTimeEvent = new EventEmitter<TimerValue>();
 
-  workTimeValue: string = '00:00';
-  restTimeValue: string = '00:00';
+  workTimeValue: string = '00:00:00';
+  breakTimeValue: string = '00:00:00';
 
+  ngOnInit(): void {
+    console.log("here")
+    this.workTimeValue= this.workTime.toString();
+    this.breakTimeValue= this.breakTime.toString();
+  }
 
   changeTimes(){
-    const [workMinutes, workSeconds] = this.workTimeValue.split(':').map(Number);
-    const [restMinutes, restSeconds] = this.restTimeValue.split(':').map(Number);
-    this.changeWorkTimeEvent.emit(new TimerValue(workMinutes, workSeconds));
-    this.changeWorkTimeEvent.emit(new TimerValue(restMinutes, restSeconds));
+    const [workHours, workMinutes, workSeconds] = this.workTimeValue.split(':').map(Number);
+    const [restHours, restMinutes, restSeconds] = this.breakTimeValue.split(':').map(Number);
+    this.changeWorkTimeEvent.emit(new TimerValue(workHours*60 + workMinutes, workSeconds));
+    this.changeBreakTimeEvent.emit(new TimerValue(restHours*60 + restMinutes, restSeconds));
+    this.windowCloseEvent.emit();
   }
 
 }

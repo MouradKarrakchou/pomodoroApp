@@ -1,4 +1,4 @@
-<div [ngClass]="{'hidden': !windowOpened, 'flex': windowOpened }" class="flex flex-col rounded-3xl w-[25vw] h-[35vh] z-20 bg-gray-200 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+<div [ngClass]="{'hidden': !windowOpened, 'flex': windowOpened }" class="flex flex-col rounded-3xl w-[25vw] min-w-[30vh] h-[35vh] z-20 bg-gray-200 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
   <div class="m-auto">
     <form class="max-w-[8rem] mx-auto">
       <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Work Time:</label>
@@ -22,14 +22,14 @@
             <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
           </svg>
         </div>
-        <input [(ngModel)]="restTimeValue" name="restTime" type="time" step="1" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" min="00:00" max="100:00" value="00:00" required />
+        <input [(ngModel)]="breakTimeValue" name="restTime" type="time" step="1" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" min="00:00" max="100:00" value="00:00" required />
       </div>
     </form>
 
   </div>
 
 
-  <button type="button" class="w-[50%] text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 m-auto">Validate</button>
+  <button type="button" (click)="changeTimes()" class="w-[50%] text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 m-auto">Validate</button>
 
 
 
