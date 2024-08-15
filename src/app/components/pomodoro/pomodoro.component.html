@@ -1,15 +1,15 @@
-<div class="flex mt-auto mb-auto">
-  <div class="m-auto">
-    <img *ngIf="isWorkTime;else restTime" src="../../../assets/images/workingIcon.png" alt="image" height="512" width="512">
+<div class="flex mb-auto h-[100%] flex-col">
+  <div class="ml-auto mr-auto">
+    <img *ngIf="isWorkTime;else restTime" ngSrc="assets/images/workingIcon.png" priority="" alt="image" height="300" width="300">
   </div>
-  <app-pomodoro-timer [workTime]="workTime" [breakTime]="breakTime" (changeSession)="changeSession($event)"  ></app-pomodoro-timer>
+  <app-pomodoro-timer class="ml-auto mr-auto" [workTime]="workTime" [breakTime]="breakTime" (changeSession)="changeSession($event)"  ></app-pomodoro-timer>
+  <app-like-session class="m-auto"></app-like-session>
 </div>
 
-<app-like-session></app-like-session>
 
 
 <ng-template #restTime>
-  <img src="../../../assets/images/relaxing.png" alt="image" height="512" width="512">
+  <img ngSrc="assets/images/relaxing.png" priority="" alt="image" height="300" width="300">
 </ng-template>
 
 

@@ -6,3 +6,8 @@
 :host {
   height: 10%;
 }
+
+
+h1 {
+  @apply text-2xl;
+}
