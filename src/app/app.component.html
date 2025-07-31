@@ -1,9 +1,11 @@
 
 
-<main [ngClass]="{'bg-gray-600':  darkMode, 'bg-red-400': !darkMode}" class="main flex flex-col h-[100%] ">
+<main [ngClass]="{'bg-gray-600':  darkMode, 'bg-orange-800': !darkMode}" class="main flex flex-col h-[100%] ">
   <app-header (darkModeEvent)="changeMode($event)"></app-header>
   <app-pomodoro></app-pomodoro>
 </main>
+
+<app-description></app-description>
 
 
 

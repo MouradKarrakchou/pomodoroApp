@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {timer} from "rxjs";
-import {TimerValue} from "../../objects/timerValue";
 import {NgIf} from "@angular/common";
 import {SettingsComponent} from "../settings/settings.component";
+import Howl from "howler";
 
 @Component({
   selector: 'app-pomodoro-timer',
@@ -15,9 +15,9 @@ import {SettingsComponent} from "../settings/settings.component";
   styleUrl: './pomodoro-timer.component.css'
 })
 export class PomodoroTimerComponent {
-  @Input() workTime : TimerValue
+  @Input() workTime : number
 
-  @Input() breakTime : TimerValue
+  @Input() breakTime : number
 
   @Output() changeSession = new EventEmitter<string>();
 
@@ -29,32 +29,40 @@ export class PomodoroTimerComponent {
 
   currentReferenceTime: number;
 
-  timeVariable : TimerValue;
+  timeVariable : number;
 
   timeLeft: number;
 
+  audio = new Audio();
+
+
+
   windowOpened = false;
+
 
   getPercentage(): number{
     return Math.round(10*(100 * (this.currentReferenceTime - this.timeLeft) / (this.currentReferenceTime)))/10;
   }
 
   ngOnInit(): void {
-    this.currentReferenceTime = this.workTime.minutes * 60 + this.workTime.seconds
-    this.timeVariable = this.workTime.clone();
-    this.timeLeft = this.workTime.minutes * 60 + this.workTime.seconds;
+    this.currentReferenceTime = this.workTime
+    this.timeVariable = this.workTime;
+    this.timeLeft = this.workTime;
+    this.audio.src = 'assets/sounds/Little_bell_sound_effect.mp3';
+    this.audio.load();
+    this.audio.volume = 0.1;
   }
 
   clickParameter() : void{
     this.windowOpened = !this.windowOpened;
   }
 
-  changeWorkTime(newTime : TimerValue) : void{
+  changeWorkTime(newTime : number) : void{
     this.workTime = newTime
     this.clearChronometers()
   }
 
-  changeBreakTime(newTime : TimerValue) : void{
+  changeBreakTime(newTime : number) : void{
     this.breakTime = newTime
     this.clearChronometers()
   }
@@ -75,12 +83,12 @@ export class PomodoroTimerComponent {
   clearChronometers():void{
     this.pauseTimer();
     if (this.isWorkTime)
-    {this.timeLeft = this.workTime.getTotalTime();
-      this.timeVariable= this.workTime.clone();}
+    {this.timeLeft = this.workTime;
+      this.timeVariable= this.workTime;}
 
   else
-    {this.timeLeft = this.breakTime.getTotalTime()
-      this.timeVariable= this.breakTime.clone();}
+    {this.timeLeft = this.breakTime
+      this.timeVariable= this.breakTime;}
     this.currentReferenceTime = this.timeLeft;
 
   }
@@ -91,32 +99,43 @@ export class PomodoroTimerComponent {
   }
 
 
+  skipSession():void{
+    this.endSession();
+  }
+
+  endSession():void{
+    this.timeVariable = 0;
+    if (this.isWorkTime) {
+      this.timeLeft = this.breakTime
+      this.currentReferenceTime = this.timeLeft;
+      this.changeSession.emit("break");
+    }
+    else {
+      this.timeLeft = this.workTime
+      this.currentReferenceTime = this.timeLeft;
+      this.changeSession.emit("work");
+    }
+    this.isWorkTime = !this.isWorkTime;
+  }
+
   startTimer(): void {
     this.timerStarted = true;
     this.timer = setInterval(() => {
-      const minutes = Math.floor(this.timeLeft / 60);
-      const seconds = this.timeLeft % 60;
 
-      this.timeVariable.minutes = minutes;
-      this.timeVariable.seconds = seconds;
+      this.timeVariable = this.timeLeft;
 
       this.timeLeft--;
 
       if (this.timeLeft < 0) {
-        this.timeVariable = new TimerValue(0,0);
-        if (this.isWorkTime) {
-          this.timeLeft = this.breakTime.getTotalTime()
-          this.currentReferenceTime = this.timeLeft;
-          this.changeSession.emit("break");
-        }
-        else {
-          this.timeLeft = this.workTime.getTotalTime()
-          this.currentReferenceTime = this.timeLeft;
-          this.changeSession.emit("work");
-        }
-        this.isWorkTime = !this.isWorkTime;
+        this.audio.play();
+        this.endSession()
       }
     }, 1000);
   }
 
+  protected formatTimeComponent(component: number): string {
+    return component < 10 ? `0${component}` : `${component}`;
+  }
+
+  protected readonly Math = Math;
 }

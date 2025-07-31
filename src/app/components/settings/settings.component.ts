@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass} from "@angular/common";
-import {TimerValue} from "../../objects/timerValue";
 import {FormsModule} from "@angular/forms";
 
 @Component({
@@ -15,27 +14,25 @@ import {FormsModule} from "@angular/forms";
 })
 export class SettingsComponent {
   @Input() windowOpened : boolean;
-  @Input() workTime : TimerValue
-  @Input() breakTime : TimerValue
+  @Input() workTime : number
+  @Input() breakTime : number
 
   @Output() windowCloseEvent = new EventEmitter<void>();
-  @Output() changeWorkTimeEvent = new EventEmitter<TimerValue>();
-  @Output() changeBreakTimeEvent = new EventEmitter<TimerValue>();
+  @Output() changeWorkTimeEvent = new EventEmitter<number>();
+  @Output() changeBreakTimeEvent = new EventEmitter<number>();
 
-  workTimeValue: string = '00:00:00';
-  breakTimeValue: string = '00:00:00';
+  workTimeMinutes : number;
+  breakTimeMinutes : number;
 
   ngOnInit(): void {
-    console.log("here")
-    this.workTimeValue= this.workTime.toString();
-    this.breakTimeValue= this.breakTime.toString();
+    this.workTimeMinutes= this.workTime / 60;
+    this.breakTimeMinutes= this.breakTime / 60;
   }
 
   changeTimes(){
-    const [workHours, workMinutes, workSeconds] = this.workTimeValue.split(':').map(Number);
-    const [restHours, restMinutes, restSeconds] = this.breakTimeValue.split(':').map(Number);
-    this.changeWorkTimeEvent.emit(new TimerValue(workHours*60 + workMinutes, workSeconds));
-    this.changeBreakTimeEvent.emit(new TimerValue(restHours*60 + restMinutes, restSeconds));
+    console.log(this.workTimeMinutes * 60)
+    this.changeWorkTimeEvent.emit(this.workTimeMinutes * 60);
+    this.changeBreakTimeEvent.emit(this.breakTimeMinutes * 60);
     this.windowCloseEvent.emit();
   }
 

@@ -1,15 +1,15 @@
 <div class='bg-[#7b737336] flex shadow-md py-4 px-4 sm:px-10 font-[sans-serif] min-h-[70px] tracking-wide relative z-50 '>
-  <div class="flex m-auto">
+
+  <div class='flex flex-wrap items-center justify-between gap-5 w-full'>
+      <h1 class="font-bold text-black-300 titleText"> Pomodoro  </h1>
+  </div>
+
+  <div class="flex ml-auto">
+    <h1 class="font-bold text-blue-950 titleText mr-2">DarkMode</h1>
     <label for="AcceptConditions" class="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-[#575C6C] transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-blue-400">
       <input type="checkbox" (change)="changeMode($event)" id="AcceptConditions" class="peer sr-only" />
       <span class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-200 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
     </label>
-    <h1 class="font-bold text-blue-950 titleText ml-4">DarkMode</h1>
-  </div>
-
-
-  <div class='flex flex-wrap items-center justify-between gap-5 w-full'>
-      <div class="m-auto font-bold text-black-300 titleText"> Like a Pomodoro app but better </div>
   </div>
 
 </div>

@@ -13,11 +13,11 @@ h1 {
 }
 
 .titleText{
-  font-size : 3vh;
+  font-size : 2vh;
 }
 
 @media only screen and (max-width: 1200px) {
   .titleText{
-    font-size : 3vw;
+    font-size : 1.5vw;
   }
 }

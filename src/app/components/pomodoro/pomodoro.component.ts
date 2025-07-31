@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass, NgIf, NgOptimizedImage} from "@angular/common";
 import {LikeSessionComponent} from "../like-session/like-session.component";
-import {TimerValue} from "../../objects/timerValue";
 import {PomodoroTimerComponent} from "../pomodoro-timer/pomodoro-timer.component";
 import {SettingsComponent} from "../settings/settings.component";
 
@@ -21,9 +20,9 @@ import {SettingsComponent} from "../settings/settings.component";
 })
 export class PomodoroComponent {
 
-  workTime = new TimerValue(25,0)
+  workTime = 25*60
 
-  breakTime = new TimerValue(5,0)
+  breakTime = 5*60
 
   isWorkTime = true;
 
